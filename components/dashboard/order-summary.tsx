@@ -30,18 +30,31 @@ export function OrderSummary({
     try {
       setIsLoading(true);
       if (!btcPrice) {
-        throw new Error("BTC price not available");
+        toast.error("Error", {
+          description: "BTC price not available",
+        });
+        return;
       }
       const currentPrice = parseFloat(btcPrice.price);
-      await createMarketOrder(orderType, parseFloat(amount), currentPrice);
-      toast.success("Order placed", {
-        description: `Successfully placed ${orderType.toLowerCase()} order for ${amount} BTC at current market price`,
-      });
-      onSuccess();
+      const result = await createMarketOrder(
+        orderType,
+        parseFloat(amount),
+        currentPrice
+      );
+
+      if (result.success) {
+        toast.success("Order placed", {
+          description: `Successfully placed ${orderType.toLowerCase()} order for ${amount} BTC at current market price`,
+        });
+        onSuccess();
+      } else {
+        toast.error("Error", {
+          description: result.message,
+        });
+      }
     } catch (error) {
       toast.error("Error", {
-        description:
-          error instanceof Error ? error.message : "Failed to place order",
+        description: "An unexpected error occurred",
       });
     } finally {
       setIsLoading(false);
@@ -52,21 +65,30 @@ export function OrderSummary({
     try {
       setIsLoading(true);
       if (!price) {
-        throw new Error("Price is required for limit orders");
+        toast.error("Error", {
+          description: "Price is required for limit orders",
+        });
+        return;
       }
-      await createLimitOrder(
+      const result = await createLimitOrder(
         orderType,
         parseFloat(amount),
         parseFloat(price.toString())
       );
-      toast.success("Order placed", {
-        description: `Successfully placed ${orderType.toLowerCase()} order for ${amount} BTC at $${price}`,
-      });
-      onSuccess();
+
+      if (result.success) {
+        toast.success("Order placed", {
+          description: `Successfully placed ${orderType.toLowerCase()} order for ${amount} BTC at $${price}`,
+        });
+        onSuccess();
+      } else {
+        toast.error("Error", {
+          description: result.message,
+        });
+      }
     } catch (error) {
       toast.error("Error", {
-        description:
-          error instanceof Error ? error.message : "Failed to place order",
+        description: "An unexpected error occurred",
       });
     } finally {
       setIsLoading(false);
