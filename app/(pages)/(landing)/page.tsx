@@ -31,7 +31,20 @@ export default function Home() {
         <div className=" z-10 flex flex-col items-center space-y-12 max-w-4xl mx-auto">
           <AnimatedHeader
             title="Trading Simulator"
-            subtitle="Experience real-time cryptocurrency trading with live market data"
+            subtitle={
+              <>
+                Experience real-time cryptocurrency trading with live market.
+                data{" "}
+                <Link
+                  href="https://youtu.be/61x8dGf1CZs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline font-medium hover:text-primary transition-colors"
+                >
+                  Watch demo
+                </Link>
+              </>
+            }
           />
 
           <section className="flex flex-col items-center space-y-8">

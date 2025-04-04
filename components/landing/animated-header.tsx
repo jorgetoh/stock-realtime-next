@@ -1,10 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ReactNode } from "react";
 
 interface AnimatedHeaderProps {
   title: string;
-  subtitle: string;
+  subtitle: ReactNode;
 }
 
 export function AnimatedHeader({ title, subtitle }: AnimatedHeaderProps) {
@@ -61,12 +62,12 @@ export function AnimatedHeader({ title, subtitle }: AnimatedHeaderProps) {
         {title}
       </motion.h1>
 
-      <motion.p
+      <motion.div
         className="text-xl text-muted-foreground"
         variants={subtitleVariants}
       >
         {subtitle}
-      </motion.p>
+      </motion.div>
 
       <motion.p
         variants={subtitleVariants}

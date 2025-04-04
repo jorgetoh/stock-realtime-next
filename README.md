@@ -4,6 +4,8 @@ A modern trading simulator application built with Next.js
 
 https://github.com/user-attachments/assets/e9507547-44ee-47db-b067-a3fbbce0b764
 
+Product demo: https://youtu.be/61x8dGf1CZs
+
 ## Tech Stack
 
 - [Next.js](https://nextjs.org) - React framework
